@@ -32,8 +32,10 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
 
         tvCaption.setText(photo.getCaption());
+        tvUsername.setText(photo.getUsername() + "--");
         // clear image view while we wait for new image to load
         ivPhoto.setImageResource(0);
         Picasso.with(getContext()).load(photo.getImageURL()).into(ivPhoto);
