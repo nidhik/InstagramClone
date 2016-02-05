@@ -76,15 +76,18 @@ public class StreamActivity extends AppCompatActivity {
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
                         JSONObject imageJSON = photoJSON.getJSONObject("images").getJSONObject("standard_resolution");
+                        JSONObject userJSON = photoJSON.getJSONObject("user");
 
                         InstagramPhoto photo = new InstagramPhoto();
 
-                        photo.setUsername(photoJSON.getJSONObject("user").getString("username"));
+                        photo.setUsername(userJSON.getString("username"));
+                        photo.setProfilePicture(userJSON.getString("profile_picture"));
                         photo.setCaption(photoJSON.getJSONObject("caption").getString("text"));
                         photo.setLikesCount(photoJSON.getJSONObject("likes").getInt("count"));
                         photo.setType(photoJSON.getString("type"));
                         photo.setImageURL(imageJSON.getString("url"));
                         photo.setImageHeight(imageJSON.getInt("height"));
+                        photo.setCreatedTime(Long.parseLong(photoJSON.getString("created_time")));
 
                         photos.add(photo);
 

@@ -11,6 +11,8 @@ public class InstagramPhoto {
     private int imageHeight;
     private int likesCount;
     private String type;
+    private long createdTime;
+    private String profilePicture;
 
     public String getUsername() {
         return username;
@@ -58,5 +60,21 @@ public class InstagramPhoto {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public long getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(long createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }
