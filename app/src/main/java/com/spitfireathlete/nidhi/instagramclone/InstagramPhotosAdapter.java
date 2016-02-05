@@ -2,6 +2,7 @@ package com.spitfireathlete.nidhi.instagramclone;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
         TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
+        TextView tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
 
@@ -43,6 +45,9 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         tvCaption.setText(photo.getCaption());
         tvUsername.setText(photo.getUsername() + "--");
         tvLikes.setText(photo.getLikesCount() + " likes");
+
+        CharSequence relTime = DateUtils.getRelativeTimeSpanString(photo.getCreatedTime()*1000, System.currentTimeMillis(), 0);
+        tvRelativeTime.setText(relTime);
         // clear image view while we wait for new image to load
         ivPhoto.setImageResource(0);
         ivPhoto.setImageResource(0);
