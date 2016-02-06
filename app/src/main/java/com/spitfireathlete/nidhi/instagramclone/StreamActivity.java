@@ -1,6 +1,7 @@
 package com.spitfireathlete.nidhi.instagramclone;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ public class StreamActivity extends AppCompatActivity {
 
     private List<InstagramPhoto> photos;
     private ArrayAdapter<InstagramPhoto> aPhotos;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,15 @@ public class StreamActivity extends AppCompatActivity {
         aPhotos = new InstagramPhotosAdapter(this, photos); // adapter
         ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos); // view
         lvPhotos.setAdapter(aPhotos);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchPopularPhotos();
+            }
+        });
 
         // send out API request to popular photos
         fetchPopularPhotos();
@@ -70,9 +81,14 @@ public class StreamActivity extends AppCompatActivity {
         client.get(POPULAR, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                swipeContainer.setRefreshing(false);
+
                 JSONArray photosJSON = null;
                 try {
                     photosJSON = response.getJSONArray("data");
+                    photos.clear();
+
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
                         JSONObject imageJSON = photoJSON.getJSONObject("images").getJSONObject("standard_resolution");
