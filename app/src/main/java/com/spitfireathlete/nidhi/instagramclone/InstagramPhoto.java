@@ -7,8 +7,9 @@ public class InstagramPhoto {
 
     private String username;
     private String caption;
-    private String imageURL;
-    private int imageHeight;
+    private String URL;
+    private int height;
+    private int width;
     private int likesCount;
     private String type;
     private long createdTime;
@@ -30,20 +31,28 @@ public class InstagramPhoto {
         this.caption = caption;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getURL() {
+        return URL;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 
-    public int getImageHeight() {
-        return imageHeight;
+    public int getHeight() {
+        return height;
     }
 
-    public void setImageHeight(int imageHeight) {
-        this.imageHeight = imageHeight;
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     public int getLikesCount() {

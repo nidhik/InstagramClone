@@ -91,19 +91,40 @@ public class StreamActivity extends AppCompatActivity {
 
                     for (int i = 0; i < photosJSON.length(); i++) {
                         JSONObject photoJSON = photosJSON.getJSONObject(i);
-                        JSONObject imageJSON = photoJSON.getJSONObject("images").getJSONObject("standard_resolution");
+
                         JSONObject userJSON = photoJSON.getJSONObject("user");
 
                         InstagramPhoto photo = new InstagramPhoto();
 
                         photo.setUsername(userJSON.getString("username"));
                         photo.setProfilePicture(userJSON.getString("profile_picture"));
-                        photo.setCaption(photoJSON.getJSONObject("caption").getString("text"));
+
+                        JSONObject captionJSON = photoJSON.getJSONObject("caption");
+                        if (captionJSON != null) {
+                            photo.setCaption(captionJSON.getString("text"));
+                        }
                         photo.setLikesCount(photoJSON.getJSONObject("likes").getInt("count"));
-                        photo.setType(photoJSON.getString("type"));
-                        photo.setImageURL(imageJSON.getString("url"));
-                        photo.setImageHeight(imageJSON.getInt("height"));
+
+
                         photo.setCreatedTime(Long.parseLong(photoJSON.getString("created_time")));
+
+                        String type = photoJSON.getString("type");
+                        photo.setType(type);
+
+                        // FIXME: do this properly, with different subclasses for videos and photos
+
+                        if (type.equals("video")) {
+                            JSONObject videoJSON = photoJSON.getJSONObject("videos").getJSONObject("standard_resolution");
+                            photo.setURL(videoJSON.getString("url"));
+                            photo.setHeight(videoJSON.getInt("height"));
+                            photo.setWidth(videoJSON.getInt("width"));
+
+                        } else {
+                            JSONObject imageJSON = photoJSON.getJSONObject("images").getJSONObject("standard_resolution");
+                            photo.setURL(imageJSON.getString("url"));
+                            photo.setHeight(imageJSON.getInt("height"));
+                            photo.setWidth(imageJSON.getInt("width"));
+                        }
 
                         photos.add(photo);
 
