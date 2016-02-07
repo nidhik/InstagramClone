@@ -131,8 +131,16 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         vvVideo.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                vvVideo.start();
-                playButton.setVisibility(View.GONE);
+
+                if (vvVideo.isPlaying()) {
+                    vvVideo.pause();
+                    playButton.setVisibility(View.VISIBLE);
+                } else {
+                    vvVideo.start();
+                    playButton.setVisibility(View.GONE);
+                }
+
+
                 return vvVideo.performClick();
 
             }
