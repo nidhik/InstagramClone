@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -46,6 +47,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             }
         }
 
+        //FIXME: do this properly with subclasses for different types of content
         if (photo.getType().equals("image")) {
             updatePhotoViews(convertView, photo);
         }
@@ -100,8 +102,14 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         final VideoView vvVideo =(VideoView) convertView.findViewById(R.id.vvVideo);
         vvVideo.setVideoPath(photo.getURL());
 
-        android.widget.MediaController mediaController = new android.widget.MediaController(getContext());
+        vvVideo.getLayoutParams().height = photo.getHeight();
+        vvVideo.getLayoutParams().width = photo.getWidth();
+
+
+        final android.widget.MediaController mediaController = new android.widget.MediaController(getContext(), false); // false for no fast forward ability
+
         mediaController.hide();
+        mediaController.setVisibility(View.GONE);
         mediaController.setAnchorView(vvVideo);
         vvVideo.setMediaController(mediaController);
 
@@ -109,7 +117,20 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         vvVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                int end = mp.getDuration();
+                vvVideo.seekTo(end);
+                // TODO: display play button overlay
+
+            }
+
+        });
+
+        vvVideo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
                 vvVideo.start();
+                return vvVideo.performClick();
+
             }
         });
 
@@ -121,19 +142,14 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.video_ivProfilePic);
 
 
-
         tvCaption.setText(photo.getCaption());
         tvUsername.setText(photo.getUsername() + "--");
         tvLikes.setText(photo.getLikesCount() + " likes");
-        CharSequence relTime = DateUtils.getRelativeTimeSpanString(photo.getCreatedTime()*1000, System.currentTimeMillis(), 0);
+        CharSequence relTime = DateUtils.getRelativeTimeSpanString(photo.getCreatedTime() * 1000, System.currentTimeMillis(), 0);
         tvRelativeTime.setText(relTime);
 
         // clear image view while we wait for new image to load
         ivProfilePic.setImageResource(0);
-
-
-        //FIXME: do this properly with subclasses for different types on content
-
 
 
         Picasso.with(getContext())
@@ -162,8 +178,6 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         ivPhoto.setImageResource(0);
         ivProfilePic.setImageResource(0);
 
-
-        //FIXME: do this properly with subclasses for different types on content
 
         Picasso.with(getContext()).load(photo.getURL()).into(ivPhoto);
 

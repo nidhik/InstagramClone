@@ -57,6 +57,7 @@
         android:id="@+id/video_tvRelativeTime"
         android:layout_alignTop="@+id/video_ivProfilePic"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="#7729d7" />
 
 </RelativeLayout>
