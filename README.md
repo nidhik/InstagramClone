@@ -12,7 +12,6 @@ Completed user stories:
  * [x] Optional: Add pull-to-refresh for popular stream with SwipeRefreshLayout
  * [x] Optional: Display each user profile image using a RoundedImageView 
  * [x] Optional: Improve the user interface through styling and coloring
- * [x] Optional: Allow video posts to be played
  * [x] Anything else that you can get done to improve the app functionality or user experience! - can play/pause the video in the feed itself. Also added the username next to the profile piture as in the Instgram app.
 
 
