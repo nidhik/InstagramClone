@@ -2,8 +2,12 @@ package com.spitfireathlete.nidhi.instagramclone;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,8 +64,6 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
     private Transformation getCircleTransformation() {
         return new RoundedTransformationBuilder()
-                .borderColor(Color.BLACK)
-                .borderWidthDp(3)
                 .cornerRadiusDp(30)
                 .oval(false)
                 .build();
@@ -102,6 +104,9 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         final ImageView playButton = (ImageView) convertView.findViewById(R.id.video_playButton);
 
         final VideoView vvVideo =(VideoView) convertView.findViewById(R.id.vvVideo);
+
+
+
         vvVideo.setVideoPath(photo.getURL());
 
         vvVideo.getLayoutParams().height = photo.getHeight();
@@ -114,15 +119,14 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         mediaController.setVisibility(View.GONE);
         mediaController.setAnchorView(vvVideo);
         vvVideo.setMediaController(mediaController);
+        vvVideo.clearFocus();
 
-        vvVideo.requestFocus();
         vvVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 int end = mp.getDuration();
                 vvVideo.seekTo(end);
                 playButton.setVisibility(View.VISIBLE);
-                // TODO: display play button overlay
 
             }
 
@@ -132,14 +136,17 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
+
+
                 if (vvVideo.isPlaying()) {
                     vvVideo.pause();
+
                     playButton.setVisibility(View.VISIBLE);
                 } else {
+                    vvVideo.seekTo(0);
                     vvVideo.start();
                     playButton.setVisibility(View.GONE);
                 }
-
 
                 return vvVideo.performClick();
 
@@ -172,16 +179,25 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
     }
 
     public void updatePhotoViews(View convertView, InstagramPhoto photo) {
-        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+
+        TextView tvProfileUsername = (TextView) convertView.findViewById(R.id.tvProfileUsername);
+        TextView tvCaptionAndUsername = (TextView) convertView.findViewById(R.id.tvCaptionAndUsername);
         TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
         TextView tvRelativeTime = (TextView) convertView.findViewById(R.id.tvRelativeTime);
         ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.ivProfilePic);
 
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
 
-        tvCaption.setText(photo.getCaption());
-        tvUsername.setText(photo.getUsername() + "--");
+        // Blue: #125688
+
+        SpannableStringBuilder captionBuidler = new SpannableStringBuilder();
+        captionBuidler.append(photo.getUsername());
+        captionBuidler.setSpan(new StyleSpan(Typeface.BOLD), 0, captionBuidler.length(), 0);
+        captionBuidler.setSpan(new ForegroundColorSpan(Color.argb(255, 18, 86, 136)), 0, captionBuidler.length(), 0);
+        captionBuidler.append(photo.getCaption());
+
+        tvCaptionAndUsername.setText(captionBuidler);
+        tvProfileUsername.setText(photo.getUsername());
         tvLikes.setText(photo.getLikesCount() + " likes");
         CharSequence relTime = DateUtils.getRelativeTimeSpanString(photo.getCreatedTime()*1000, System.currentTimeMillis(), 0);
         tvRelativeTime.setText(relTime);
