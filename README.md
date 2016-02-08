@@ -2,7 +2,7 @@
 An Android clone of the Instagram app.
 # Codepath Task List App
 
-Time spent: about 30 hours spent in total 
+Time spent: about 15-20 hours spent in total 
 
 Completed user stories:
 
