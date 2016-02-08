@@ -10,10 +10,10 @@ Completed user stories:
  * [x] Required: For each photo displayed, user can see the following details: Graphic, Caption, Username 
  * [x] Optional: Relative timestamp, like count, user profile image.
  * [x] Optional: Add pull-to-refresh for popular stream with SwipeRefreshLayout
- * [x] Optional: isplay each user profile image using a RoundedImageView 
+ * [x] Optional: Display each user profile image using a RoundedImageView 
  * [x] Optional: Improve the user interface through styling and coloring
  * [x] Optional: Allow video posts to be played
- * [x] Anything else that you can get done to improve the app functionality or user experience! - can play/pause the video in the feed itself.
+ * [x] Anything else that you can get done to improve the app functionality or user experience! - can play/pause the video in the feed itself. Also added the username next to the profile piture as in the Instgram app.
 
 
 Challenges:
