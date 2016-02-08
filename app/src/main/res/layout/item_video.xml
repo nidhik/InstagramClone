@@ -2,61 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/video_tvLikes"
-        android:layout_above="@+id/video_tvUsername"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp" />
 
+<!-- Video -->
     <VideoView
         android:id="@+id/vvVideo"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_below="@+id/video_ivProfilePic"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/video_tvCaption"
-        android:maxLines="3"
-        android:ellipsize="end"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/vvVideo"
-        android:layout_toRightOf="@+id/video_tvLikes"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/video_tvUsername"
-        android:textStyle="bold"
-        android:layout_alignTop="@+id/video_tvCaption"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/video_ivProfilePic"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/video_tvRelativeTime"
-        android:layout_alignTop="@+id/video_ivProfilePic"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
 
     <ImageView
         android:layout_width="75dp"
@@ -68,5 +22,74 @@
         android:layout_below="@+id/video_ivProfilePic"
         android:layout_marginTop="35dp"
         android:src="@drawable/play_btn"/>
+
+    <!-- Post Header -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x minutes ago"
+        android:id="@+id/video_tvRelativeTime"
+        android:layout_alignTop="@+id/video_ivProfilePic"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/video_ivProfilePic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="username"
+        android:id="@+id/video_tvProfileUsername"
+        android:layout_alignTop="@+id/video_tvRelativeTime"
+        android:layout_toRightOf="@+id/video_ivProfilePic"
+        android:layout_toEndOf="@+id/video_ivProfilePic"
+        android:layout_marginLeft="10dp"
+        android:textColor="#125688" />
+
+    <!-- Post data -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/video_tvLikes"
+        android:layout_below="@+id/vvVideo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#125688" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="\@username: caption"
+        android:id="@+id/video_tvCaptionAndUsername"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/vvVideo"
+        android:layout_toRightOf="@+id/video_tvLikes"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"/>
+
+
+
+
 
 </RelativeLayout>

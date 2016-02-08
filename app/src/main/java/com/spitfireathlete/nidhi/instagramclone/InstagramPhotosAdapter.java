@@ -154,15 +154,15 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         });
 
 
-        TextView tvUsername = (TextView) convertView.findViewById(R.id.video_tvUsername);
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.video_tvCaption);
+        TextView tvProfileUsername = (TextView) convertView.findViewById(R.id.video_tvProfileUsername);
+        TextView tvCaptionAndUsername = (TextView) convertView.findViewById(R.id.video_tvCaptionAndUsername);
         TextView tvLikes = (TextView) convertView.findViewById(R.id.video_tvLikes);
         TextView tvRelativeTime = (TextView) convertView.findViewById(R.id.video_tvRelativeTime);
         ImageView ivProfilePic = (ImageView) convertView.findViewById(R.id.video_ivProfilePic);
 
 
-        tvCaption.setText(photo.getCaption());
-        tvUsername.setText(photo.getUsername() + "--");
+        tvCaptionAndUsername.setText(getStyledCaption(photo));
+        tvProfileUsername.setText(photo.getUsername());
         tvLikes.setText(photo.getLikesCount() + " likes");
         CharSequence relTime = DateUtils.getRelativeTimeSpanString(photo.getCreatedTime() * 1000, System.currentTimeMillis(), 0);
         tvRelativeTime.setText(relTime);
@@ -188,16 +188,8 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
 
-        // Blue: #125688
 
-        SpannableStringBuilder captionBuidler = new SpannableStringBuilder();
-        captionBuidler.append(photo.getUsername());
-        captionBuidler.setSpan(new StyleSpan(Typeface.BOLD), 0, captionBuidler.length(), 0);
-        captionBuidler.setSpan(new ForegroundColorSpan(Color.argb(255, 18, 86, 136)), 0, captionBuidler.length(), 0);
-        captionBuidler.append(" ");
-        captionBuidler.append(photo.getCaption());
-
-        tvCaptionAndUsername.setText(captionBuidler);
+        tvCaptionAndUsername.setText(getStyledCaption(photo));
         tvProfileUsername.setText(photo.getUsername());
         tvLikes.setText(photo.getLikesCount() + " likes");
         CharSequence relTime = DateUtils.getRelativeTimeSpanString(photo.getCreatedTime()*1000, System.currentTimeMillis(), 0);
@@ -215,6 +207,16 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
                 .fit()
                 .transform(getCircleTransformation())
                 .into(ivProfilePic);
+    }
+
+    private CharSequence getStyledCaption(InstagramPhoto photo) {
+        SpannableStringBuilder captionBuidler = new SpannableStringBuilder();
+        captionBuidler.append(photo.getUsername());
+        captionBuidler.setSpan(new StyleSpan(Typeface.BOLD), 0, captionBuidler.length(), 0);
+        captionBuidler.setSpan(new ForegroundColorSpan(Color.argb(255, 18, 86, 136)), 0, captionBuidler.length(), 0);
+        captionBuidler.append(" ");
+        captionBuidler.append(photo.getCaption());
+        return captionBuidler;
     }
 
 
