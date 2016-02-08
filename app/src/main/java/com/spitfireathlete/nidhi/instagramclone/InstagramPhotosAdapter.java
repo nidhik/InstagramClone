@@ -194,6 +194,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         captionBuidler.append(photo.getUsername());
         captionBuidler.setSpan(new StyleSpan(Typeface.BOLD), 0, captionBuidler.length(), 0);
         captionBuidler.setSpan(new ForegroundColorSpan(Color.argb(255, 18, 86, 136)), 0, captionBuidler.length(), 0);
+        captionBuidler.append(" ");
         captionBuidler.append(photo.getCaption());
 
         tvCaptionAndUsername.setText(captionBuidler);
