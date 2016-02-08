@@ -32,7 +32,7 @@ I ended up overlaying a play button on top of the video and requireing the user 
 
 Notes:
 
-Code improvements I'm aware of that I didn't have time for include:
+Code improvements I'm aware of that I didn't have time to include:
 * Creating a seperate model for InstagramVideo 
 * Implement View Holder pattern in adapter
 * move networking/deserialization code out of the activity, it doesn't belong there
