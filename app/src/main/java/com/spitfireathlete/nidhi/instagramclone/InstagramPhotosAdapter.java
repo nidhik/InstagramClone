@@ -101,8 +101,6 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
     public void updateVideoView(View convertView, InstagramPhoto photo) {
 
-        final ImageView playButton = (ImageView) convertView.findViewById(R.id.video_playButton);
-
         final VideoView vvVideo =(VideoView) convertView.findViewById(R.id.vvVideo);
 
 
@@ -124,10 +122,7 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         vvVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                int end = mp.getDuration();
-                vvVideo.seekTo(end);
-                playButton.setVisibility(View.VISIBLE);
-
+                vvVideo.start();
             }
 
         });
@@ -136,20 +131,15 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-
-
                 if (vvVideo.isPlaying()) {
                     vvVideo.pause();
 
-                    playButton.setVisibility(View.VISIBLE);
                 } else {
                     vvVideo.seekTo(0);
                     vvVideo.start();
-                    playButton.setVisibility(View.GONE);
                 }
 
                 return vvVideo.performClick();
-
             }
         });
 
