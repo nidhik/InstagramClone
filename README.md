@@ -21,7 +21,7 @@ I created a different layouts for list items that displayed a photo vs a video, 
 
 The ViewHolder pattern also becomes slightly less effective with this approach because you may have attached a view of the incorrect type to the recycled list item. For example, you may have to convert a recycled list item that was displaying a photo to display a video.
 
-<b>What is correct approach when you want to display types of views in a list? </b>
+<b>What is correct approach when you want to display mutliple types of views in a list? </b>
 
 It also took me some time to figure out how to remove the pause/play controls of the MediaController from the video view. 
 <b>Is there a better way to do this that to just set its visibility to View.GONE?</b>
