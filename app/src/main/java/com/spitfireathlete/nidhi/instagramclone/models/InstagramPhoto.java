@@ -1,4 +1,4 @@
-package com.spitfireathlete.nidhi.instagramclone;
+package com.spitfireathlete.nidhi.instagramclone.models;
 
 /**
  * Created by nidhikulkarni on 2/4/16.

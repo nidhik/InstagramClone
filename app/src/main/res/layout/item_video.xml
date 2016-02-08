@@ -4,6 +4,9 @@
 
 
 <!-- Video -->
+
+
+
     <VideoView
         android:id="@+id/vvVideo"
         android:layout_width="150dp"
@@ -11,6 +14,17 @@
         android:layout_below="@+id/video_ivProfilePic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivPlay"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/play_btn"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_marginTop="125dp"
+        android:layout_centerHorizontal="true" />
 
 
     <!-- Post Header -->

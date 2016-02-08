@@ -1,4 +1,4 @@
-package com.spitfireathlete.nidhi.instagramclone;
+package com.spitfireathlete.nidhi.instagramclone.activities;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +10,9 @@ import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.spitfireathlete.nidhi.instagramclone.models.InstagramPhoto;
+import com.spitfireathlete.nidhi.instagramclone.adapters.InstagramPhotosAdapter;
+import com.spitfireathlete.nidhi.instagramclone.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +79,7 @@ public class StreamActivity extends AppCompatActivity {
     }
 
     private void fetchPopularPhotos() {
+        // FIXME: move networking calls instead of having it intermingled in the activity
         AsyncHttpClient client = new AsyncHttpClient();
 
         client.get(POPULAR, null, new JsonHttpResponseHandler() {

@@ -1,4 +1,4 @@
-package com.spitfireathlete.nidhi.instagramclone;
+package com.spitfireathlete.nidhi.instagramclone.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.spitfireathlete.nidhi.instagramclone.models.InstagramPhoto;
+import com.spitfireathlete.nidhi.instagramclone.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -101,9 +103,9 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
     public void updateVideoView(View convertView, InstagramPhoto photo) {
 
+
+        final ImageView play = (ImageView) convertView.findViewById(R.id.ivPlay);
         final VideoView vvVideo =(VideoView) convertView.findViewById(R.id.vvVideo);
-
-
 
         vvVideo.setVideoPath(photo.getURL());
 
@@ -122,10 +124,14 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
         vvVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                vvVideo.start();
+                vvVideo.seekTo(mp.getDuration());
+                play.setVisibility(View.VISIBLE);
+
             }
 
         });
+
+
 
         vvVideo.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -133,8 +139,10 @@ public class InstagramPhotosAdapter extends ArrayAdapter<InstagramPhoto> {
 
                 if (vvVideo.isPlaying()) {
                     vvVideo.pause();
+                    play.setVisibility(View.VISIBLE);
 
                 } else {
+                    play.setVisibility(View.GONE);
                     vvVideo.seekTo(0);
                     vvVideo.start();
                 }
