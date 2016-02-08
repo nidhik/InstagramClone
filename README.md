@@ -18,15 +18,23 @@ Completed user stories:
 
 Challenges:
 
-I created a different layouts for list items that displayed a photo vs a video. 
-What is correct approach when you want to display types of views in a list? 
+I created a different layouts for list items that displayed a photo vs a video, but I wasn't happy with the way this turned out.
+
 The ViewHolder pattern also becomes slightly less effective with this approach because you may have attached a view of the incorrect type to the recycled list item. For example, you may have to convert a recycled list item that was displaying a photo to display a video.
+
+<b>What is correct approach when you want to display types of views in a list? </b>
+
+It also took me some time to figure out how to remove the pause/play controls of the MediaController from the video view. 
+<b>Is there a better way to do this that to just set its visibility to View.GONE?</b>
+
+I ended up overlaying a play button on top of the video and requireing the user to tap it to play the video.
+<b>How would you approach playing the video only when it is scrolled onto the screen and stopping it when it is scrolled off?</b>
 
 Notes:
 
-Code improvements I'm awar eof that I didn't have time for include:
+Code improvements I'm aware of that I didn't have time for include:
 * Creating a seperate model for InstagramVideo 
-* Implement View Holder pattern
+* Implement View Holder pattern in adapter
 * move networking/deserialization code out of the activity, it doesn't belong there
 * Handle exceptions thrown when deserializing the result from the photos endpoint.
 
