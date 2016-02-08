@@ -1,6 +1,5 @@
 # InstagramClone
 An Android clone of the Instagram app.
-# Codepath Task List App
 
 Time spent: about 15-20 hours spent in total 
 
